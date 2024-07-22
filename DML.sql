@@ -35,3 +35,38 @@ SELECT * FROM example_table WHERE column1 = '데이터1';
 -- UPDATE 테이블명 SET 컬럼명1 = 데이터1, ...;
 -- UPDATE 테이블명 SET 컬러명1 = 데이터1, ... WHERE 조건;
 UPDATE example_table SET column1 = '수정 데이터';
+UPDATE example_table SET column1 = '선택 수정 데이터' WHERE column1 = '선택';
+
+-- DELETE : 테이블에서 레코드를 삭제할 때 사용하는 명령어
+-- DELETE FROM 테이블명 WHERE 조건
+DELETE FROM example_table WHERE column1 = '수정 데이터';
+
+
+-- DELETE FROM 테이블명
+DELETE FROM example_table;
+
+CREATE TABLE auto_table (
+	idx INT PRIMARY KEY AUTO_INCREMENT,
+    num INT
+);
+
+-- DROP TABLE : DDL 테이블 구조 전체르 제거
+-- TRUNCATE TABLE : DDL 테이블 구조만 남기고 상태를 초기화
+-- DELETE FROM : DML 테이블 레코드만 제거하여 초기화되지않는다.
+
+-- INSERT INTO SELECT : 삽입 작업시에 조회 결과를 사용하여 삽입
+INSERT INTO example_table
+SELECT * FROM example_table WHERE column1 IS NULL;
+
+-- UPDATE SELECT : 수정 작업시 조회 결과를 사용하여 수정(수정 값에 대하여)
+UPDATE example_table A
+SET A.column1 = (SELECT B.num FROM auto_table B WHERE B.idx = 1);
+
+
+
+
+INSERT INTO auto_table (num) VALUES (0);
+SELECT * FROM auto_table;
+
+DELETE FROM auto_table; #딜리트는 레코드 삭제해서 12번 부터 값을 넣으면 13번부터 다시 시작된다.
+TRUNCATE TABLE auto_table; # 트런케이트는 모든걸 초기화시켜서 1번부터 컬럼값이 다시 시작된다.
