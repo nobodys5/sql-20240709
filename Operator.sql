@@ -81,4 +81,62 @@ WHERE transaction_number = 6;
 
 -- <=> : 좌항과 우항이 모두 null 이면 true
 SELECT * FROM transaction
-WHERE note <=> complete;
+WHERE complete <=> note;
+
+-- IS : 좌항이 우항과 같으면 true (키워드)
+-- IS NOT : 좌항이 우항과 다르면 true (키워드)
+SELECT * FROM transaction WHERE complete IS TRUE;
+
+SELECT * FROM transaction WHERE complete IS NULL;
+
+SELECT * FROM transaction WHERE complete IS NOt NULL;
+
+
+-- BETWEEN a AND b : 좌항이 a보다 크거나 같으면서 b보다 작거나 같으면 true
+-- NOT BETWEEN a AND b : 좌항이 a보다 작거나 b보다 크면 true
+
+SELECT * FROM transaction WHERE transaction_date BETWEEN '2024-07-15' AND '2024-07-20'; # a부터 b까지 값을 보고싶을때 쓰는코드
+
+# a 부터 b를 제외한 값을 보고싶을 때 사용한다
+SELECT * FROM transaction WHERE transaction_date NOT BETWEEN '2024-07-15' AND '2024-07-20';
+
+
+-- IN() : 주어진 리스트 중에 하나라도 일치하면 true
+-- NOT INT() : 주어진 리스트 중에 하나도 일치하지 않으면 true
+
+SELECT * FROM transaction WHERE breakdown IN('노트북''의자');
+
+-- 논리연산자
+
+-- AND (&&) : 좌항과 우항이 모두 true이면 true
+
+
+SELECT * FROM transaction WHERE tacsaction_type = '판매' AND amount >= 1500000;
+
+-- OR (||) : 좌항과 우항중 하나라도 true이면 true
+
+SELECT * FROM transaction WHERE transaction_date >= '2024-07-15' OR tacsaction_type = '판매';
+
+
+-- XOR : 좌항과 우항이 서로 다르면 true
+
+SELECT * FROM transaction WHERE transaction_date >= '2024-07-15' XOR tacsaction_type = '판매';
+-- transaction_date >= '2024-07-15' AND tacsaction_type != '판매'
+-- or
+-- transaction_date >= '2024-07-15' AND tacsaction_type = '판매'
+
+-- LIKE 연산자 : 문자열을 패턴을 기준으로 비교하고자 할때 사용
+-- % : 임의의 개수(0 ~ 무한대)의 문자 표현
+-- _ : 임의의 한 개 문자 표현
+
+
+
+SELECT * FROM transaction WHERE transaction_date LIKE '2024-07-%';
+
+SELECT * FROM transaction WHERE transaction_date LIKE '2024-07-_1'; # __를 쓰면 전체 조회가능
+
+SELECT * FROM transaction WHERE breakdown LIKE '의%';
+
+SELECT * FROM transaction WHERE transaction_date LIKE '%-10';
+
+SELECT * FROM transaction WHERE transaction_date LIKE '2024-__-13';
