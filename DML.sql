@@ -1,8 +1,8 @@
 USE practice_sql;
 -- 데이터 조작어 (DML)
--- 테이블에 레코드를 삽입,  조회, 수정, 삭제 할때 사용
+-- 테이블에 레코드를 삽입,  조회, 수정, 삭제 할때 사용 (insert, select, update, delete)
 
--- INSERT : 테이블에 레코드를 삽입하는 명령
+-- INSERT : 테이블에 레코드를 삽입하는 명령어
 
 -- 1. 모든 컬럼에 대하여 삽입
 -- INSERT INTO 테이블명 VALUES(데이터1, 데이터2, ...);
@@ -61,7 +61,7 @@ SELECT * FROM example_table WHERE column1 IS NULL;
 -- UPDATE SELECT : 수정 작업시 조회 결과를 사용하여 수정(수정 값에 대하여)
 UPDATE example_table A
 SET A.column1 = (SELECT B.num FROM auto_table B WHERE B.idx = 1);
-
+# 수정할 테이블명 에 set 컬럼명 ( select 조회할 컬럼 from 조회할 테이블 where 조회할 데이터 '데이터 값')
 
 
 

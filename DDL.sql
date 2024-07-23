@@ -59,7 +59,7 @@ DROP DATABASE practice_sql;
 
 -- ALTER : 구조를 변경하는 명령어alter
 
--- 테이블의 컬럼 추가
+-- 테이블의 컬럼 추가 alter table 테이블명 +add 컬럼명 데이터타입
 ALTER TABLE example_table
 ADD example_column3 VARCHAR(10);
 
@@ -67,7 +67,7 @@ ADD example_column3 VARCHAR(10);
 ALTER TABLE example_table
 DROP COLUMN example_column3;
 
--- 테이블 컬럼 타입 수정
+-- 테이블 컬럼 타입 수정  alter table 테이블명 + modify cloumn 컬럼명 바꿀데이터타입
 ALTER TABLE example_table
 MODIFY COLUMN example_column2 TEXT;
 
