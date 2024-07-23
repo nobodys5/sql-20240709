@@ -38,9 +38,47 @@ SELECT amount + tax, breakdown FROM transaction;
 -- 원하는 레코드를 정확히 조회하는데 중요한 역할을 함
 
 -- = : 좌항이 우항과 같으면 true
-SELECT * FROM transaction WHERE transaction_type = '구매';
+SELECT * FROM transaction WHERE transaction_number = 12;
 
 
 -- <>, != : 좌항이 우항과 다르면 true
 SELECT * FROM transaction
-WHERE transaction_type <> '구매';
+WHERE transaction_number <> 13;
+
+SELECT * FROM transaction
+WHERE transaction_number != 13;
+
+-- < : 좌항이 우항보다 작으면 true
+-- <= : 좌항이 우항보다 작거나 같으면 true
+SELECT * FROM transaction
+WHERE amount < 1000000;
+
+SELECT * FROM transaction
+WHERE amount <= 1000000;
+
+
+-- > : 좌항이 우항보다 크면 true
+-- >= : 좌항이 우항보다 크거나 같으면 true
+SELECT * FROM transaction
+WHERE amount > 1200000;
+
+SELECT * FROM transaction
+WHERE amount >= 1200000;
+
+ALTER TABLE transaction
+ADD complete BOOLEAN;
+
+UPDATE transaction SET complete = true
+WHERE (transaction_number % 3) = 1;
+
+UPDATE transaction SET complete = false
+WHERE (transaction_number % 3) = 2;
+
+SELECT * FROM transaction;
+
+UPDATE transaction SET note = null
+WHERE transaction_number = 6;
+
+-- <=> : 좌항과 우항이 모두 null 이면 true
+SELECT * FROM transaction
+WHERE note <=> complete;
