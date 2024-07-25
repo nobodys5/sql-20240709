@@ -12,10 +12,11 @@ CREATE TABLE not_null_table (
 -- NOT NULL 제약조건이 걸린 컬럼에 값을 지정하지 않음
 INSERT INTO not_null_table (null_column) VALUES(1);
 
--- NOT NULL 제약조건이 걸린 컬럼에 null을 지정함
+-- NOT NULL 제약조건이 걸린 컬럼에 null을 지정함 2번컬럼에 NOT NULL 제약이있어서 null 값이 들어가지 않음
 INSERT INTO not_null_table VALUES(null, null);
 
 INSERT INTO not_null_table VALUES(1, 1);
+SELECT * FROM not_null_table;
 
 INSERT INTO not_null_table VALUES(null, 2);
 
@@ -63,7 +64,8 @@ INSERT INTO key_table VALUES(null, 1);
 INSERT INTO key_table (surrogate_column)VALUES(1);
 INSERT INTO key_table VALUES(1, 1);
 INSERT INTO key_table VALUES(1, 2);
-
+SELECT * FROM key_table ;
+DELETE key_table FROM primary_column;
 
 -- PRIMARY KEY 제약을 두 개 이상 지정 불가능
 CREATE TABLE composite_table (
@@ -74,7 +76,7 @@ CREATE TABLE composite_table (
 CREATE TABLE composite_table (
 	primary1 INT,
 	primary2 INT,
-    CONSTRAINT primary_key PRIMARY KEY (primary1, primary2)
+    CONSTRAINT primary_key PRIMARY KEY (primary1, primary2) #constraint를 사용하여 하나로 묶어서 primarykey로 컬럼 2개지정
 );
 
 # 마니 중요함
@@ -84,7 +86,7 @@ CREATE TABLE foreign_table (
 	primary1 INT PRIMARY KEY,
     foreign1 INT,
     CONSTRAINT foreign_key FOREIGN KEY(foreign1)
-    REFERENCES key_table(primary_column)
+    REFERENCES key_table(primary_column) #foreign key와 key_table의 primary_column이 참조된 상태
 );
 
 SELECT * FROM key_table;
