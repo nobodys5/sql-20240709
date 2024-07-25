@@ -38,23 +38,23 @@ SELECT amount + tax, breakdown FROM transaction;
 -- 원하는 레코드를 정확히 조회하는데 중요한 역할을 함
 
 -- = : 좌항이 우항과 같으면 true
-SELECT * FROM transaction WHERE transaction_number = 12;
+SELECT * FROM transaction WHERE transaction_number = 1;
 
 
 -- <>, != : 좌항이 우항과 다르면 true
 SELECT * FROM transaction
-WHERE transaction_number <> 13;
+WHERE transaction_number <> 3; # 3을 제외한 나머지 number 들이 조회된다
 
 SELECT * FROM transaction
-WHERE transaction_number != 13;
+WHERE transaction_number != 13; # 위 코드와 마찬가지
 
 -- < : 좌항이 우항보다 작으면 true
 -- <= : 좌항이 우항보다 작거나 같으면 true
 SELECT * FROM transaction
-WHERE amount < 1000000;
+WHERE amount < 1200000; # 120만 보다 작은 amount 값들을 조회
 
 SELECT * FROM transaction
-WHERE amount <= 1000000;
+WHERE amount <= 1000000; #120만 보다 작거나 같은 값들을 조회
 
 
 -- > : 좌항이 우항보다 크면 true
@@ -102,7 +102,7 @@ SELECT * FROM transaction WHERE transaction_date NOT BETWEEN '2024-07-15' AND '2
 
 
 -- IN() : 주어진 리스트 중에 하나라도 일치하면 true
--- NOT INT() : 주어진 리스트 중에 하나도 일치하지 않으면 true
+-- NOT IN() : 주어진 리스트 중에 하나도 일치하지 않으면 true
 
 SELECT * FROM transaction WHERE breakdown IN('노트북''의자');
 
@@ -140,3 +140,22 @@ SELECT * FROM transaction WHERE breakdown LIKE '의%';
 SELECT * FROM transaction WHERE transaction_date LIKE '%-10';
 
 SELECT * FROM transaction WHERE transaction_date LIKE '2024-__-13';
+
+-- 정렬
+-- ORDER BY : 조회 결과를 특정 컬럼 기준으로 정렬
+-- ASC : 오름차순 정렬 / DESC : 내림차순 정렬
+
+SELECT * FROM transaction ORDER BY amount ASC;
+SELECT * FROM transaction ORDER BY amount DESC;
+
+# tax 는 오름차순으로 정렬되고 amount는 내림차순으로 정렬된다
+SELECT * FROM transaction ORDER BY tax, amount DESC;
+
+SELECT * FROM transaction ORDER BY amount, tax DESC;
+
+
+-- 중복제거
+-- DISTINCT : SECELT 결과 테이블에서 컬럼의 조합의 중복을 제거하여 출력
+SELECT DISTINCT breakdown FROM transaction;
+
+SELECT DISTINCT breakdown, amount FROM transaction;
