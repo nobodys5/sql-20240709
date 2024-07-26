@@ -38,7 +38,8 @@ SELECT * FROM department;
 -- 사용하는 이름을 변경하고 싶을때 적용
 
 -- AS 키워드 생략가능
-SELECT department_code AS '부서코드', name AS '부서명', tel_number AS '부서 전화번호' FROM department dpt;
+SELECT department_code AS '부서코드', name AS '부서명', tel_number AS '부서 전화번호'
+ FROM department dpt;
 
 -- JOIN : 두 개 이상의 테이블을 특정 조건에 따라 조합하여 결과를 조회하고자 할때 사용하는 명령어
 
@@ -78,7 +79,7 @@ D.tel_number '부서전화번호'
  FROM employee E RIGHT JOIN department D ON E.department_code = D.department_code;
  
  -- FULL OUTER JOIN (FULL JOIN) : 기준 테이블의 모든 레코드와 조합할 테이블의 모든 레코드를 반환
- -- 만약 기준 테이블 혹은 조합할 테이블에 조건에 일치하는
+ -- 만약 기준 테이블 혹은 조합할 테이블에 조건에 일치하는 레코드가 존재하지 않으면 null로 변환
  -- MYSQL에서는 FULL OUTER JOIN을 문법상 제공하지 않음
  -- FULL JOIN = LEFT JOIN + RIGHT JOIN
  
@@ -118,7 +119,7 @@ D.tel_number '부서전화번호'
  FROM employee E INNER JOIN department D ON E.department_code = D.department_code
  WHERE E.department_code = 'A';
  
- -- 부서명이 '재무부'인 사원에 대해
+ -- 부서명이 '영업부'인 사원에 대해
  -- 사번, 이름, 나이를 조회하시오.
  SELECT E.employee_number, E.name, E.age, D.name
  FROM employee E INNER JOIN department D
